@@ -1,6 +1,8 @@
 package Final;
 
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +24,7 @@ public class ConfirmUser extends AddUser {
 			public void run() {
 				try {
 					ConfirmUser window = new ConfirmUser();
+					Customer.connection();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,6 +68,13 @@ public class ConfirmUser extends AddUser {
 		btnConfirm = new JButton("OK");
 		btnConfirm.setBounds(176, 156, 117, 29);
 		frame.getContentPane().add(btnConfirm);
+		btnConfirm.addMouseListener(new MouseAdapter() {
+			//@Override
+			public void mouseClicked(MouseEvent e) {
+				Customer.setChecking("therock", Integer.parseInt(txtCheck.getText()));
+				Customer.setSavings("therock", Integer.parseInt(txtEnterSavings.getText()));
+			}
+		});;
 	}
 
 }

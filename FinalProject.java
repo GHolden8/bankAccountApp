@@ -11,14 +11,14 @@ public class FinalProject {
 
 	public static void main(String args[]) {
 		connection();
-		login("wiseai", "password");	
+		login("wiseai", "password!");	
 	}
 	
 	public static void connection() {
 		
 		String url = "jdbc:mysql://localhost:3306/finalproject";
 		String username = "root";
-		String password = "password";
+		String password = "Redvader09!";
 
 		try {
 			connection = DriverManager.getConnection(url, username, password);
@@ -47,15 +47,5 @@ public class FinalProject {
 		}catch(Exception e) {
 			System.out.println("Exception " + e.getMessage());
 		}
-	}
-	
-	public static void getChecking() {
-		
-		
-	}
-	
-	public static void getSaving() {
-		
-		
 	}
 }

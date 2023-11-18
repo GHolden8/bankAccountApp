@@ -21,6 +21,13 @@ public class Login implements ActionListener {
 		button = new JButton("Login");
 		button.addActionListener(this);
 		
+		button.addMouseListener(new MouseAdapter() {
+			//@Override
+			public void mouseClicked(MouseEvent e) {
+				FinalProject.login(User,  Pass);
+			}
+		});;
+		
 		
 		username = new JLabel("Username: ");
 		password = new JLabel("Password: ");
@@ -46,6 +53,7 @@ public class Login implements ActionListener {
 	}
 	public static void main(String[] args) {
 		new Login();
+		FinalProject.connection();
 
 	}
 	public void actionPerformed(ActionEvent e) {
