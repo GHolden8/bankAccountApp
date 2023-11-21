@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*; 
 
-public class Login implements ActionListener {
+public class Login implements ActionListener extends FinalProject{
 
 	protected String User = "";
 	protected String Pass = "";
@@ -53,6 +53,7 @@ public class Login implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		User = user.getText();
 		Pass = pass.getText();
+		FinalProject.login(User, Pass); 
 	}
 
 }
