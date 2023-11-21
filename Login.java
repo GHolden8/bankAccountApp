@@ -1,9 +1,9 @@
-package login;
+package Final;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*; 
 
-public class Login implements ActionListener extends FinalProject{
+public class Login implements ActionListener {
 
 	protected String User = "";
 	protected String Pass = "";
@@ -20,6 +20,13 @@ public class Login implements ActionListener extends FinalProject{
 		panel = new JPanel();
 		button = new JButton("Login");
 		button.addActionListener(this);
+		
+		button.addMouseListener(new MouseAdapter() {
+			//@Override
+			public void mouseClicked(MouseEvent e) {
+				FinalProject.login(User,  Pass);
+			}
+		});;
 		
 		
 		username = new JLabel("Username: ");
@@ -48,12 +55,10 @@ public class Login implements ActionListener extends FinalProject{
 		new Login();
 		FinalProject.connection();
 
-
 	}
 	public void actionPerformed(ActionEvent e) {
 		User = user.getText();
 		Pass = pass.getText();
-		FinalProject.login(User, Pass); 
 	}
 
 }
