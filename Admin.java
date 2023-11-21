@@ -6,5 +6,8 @@ import java.sql.ResultSet;
 
 public class Admin extends User{
 
+  public static Connection connection;
+  Private String name;
+  
   
 }
