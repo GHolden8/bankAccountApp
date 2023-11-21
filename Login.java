@@ -45,8 +45,9 @@ public class Login implements ActionListener {
 		frame.setVisible(true);
 	}
 	public static void main(String[] args) {
-		FinalProject.connection();
 		new Login();
+		FinalProject.connection();
+
 
 	}
 	public void actionPerformed(ActionEvent e) {
