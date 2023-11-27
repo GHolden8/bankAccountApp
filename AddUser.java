@@ -88,6 +88,10 @@ public class AddUser{
 			//@Override
 			public void mouseClicked(MouseEvent e) {
 				Customer.add(txtEnterFirstName.getText(), txtEnterLastName.getText(), txt.getText(), txtNewPassword.getText());
+				frame.dispose();
+				Welcome window = new Welcome();
+				Customer.connection();
+				window.frame.setVisible(true);
 			}
 		});;
 	}

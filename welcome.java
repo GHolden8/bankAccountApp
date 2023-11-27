@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class Welcome {
 
-	private JFrame frame;
+	JFrame frame;
 	private JPanel left;
 	private JPanel right;
 	private JButton create;
