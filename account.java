@@ -18,17 +18,16 @@ public class account{
 	private JButton deposit;
 	private JButton withdraw;
 	private JButton view;
-	private JLabel blank;
 	private JLabel whoLogged;
+	private JButton logOut;
 	
 	/**
 	 * Constructor creates GUI 
 	 */
 	public account() {
 		//whoLogged needs get username from database and just put it in () below
-		whoLogged = new JLabel();
+		whoLogged = new JLabel("Need to put user from base here");
 			
-		blank = new JLabel();
 		frame = new JFrame();
 		panelTop = new JPanel();
 		panelL = new JPanel();
@@ -36,10 +35,12 @@ public class account{
 		deposit = new JButton("Deposit");
 		withdraw = new JButton("Withdraw");
 		view = new JButton("View");
+		logOut = new JButton("Logout");
 		
 		deposit.addActionListener(new deposit());
 		withdraw.addActionListener(new withdraw());
 		view.addActionListener(new view());
+		logOut.addActionListener(new logout());
 		
 		
 		depo = new JTextField(20);
@@ -66,7 +67,9 @@ public class account{
 		panelL.add(withdraw);
 		panelR.add(with);
 		panelL.add(view);
-		panelR.add(blank);
+		panelR.add(logOut);
+		
+		
 		
 		frame.add(panelTop, BorderLayout.NORTH);
 		frame.add(panelR, BorderLayout.EAST);
@@ -77,6 +80,15 @@ public class account{
 		frame.pack();
 		frame.setVisible(true);
 
+	}
+	private class logout implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+              frame.dispose();
+              new welcome();
+		}
+		
 	}
 	
 	/**
