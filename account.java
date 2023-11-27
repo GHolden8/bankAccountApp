@@ -26,7 +26,7 @@ public class Account{
 	 */
 	public Account() {
 		//whoLogged needs get username from database and just put it in () below
-		whoLogged = new JLabel()
+		whoLogged = new JLabel();
 			
 		blank = new JLabel();
 		frame = new JFrame();
