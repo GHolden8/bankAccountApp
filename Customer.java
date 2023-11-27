@@ -2,7 +2,7 @@ package Final;
 
 import java.sql.*;
 
-public class Customer extends User {
+public class Customer {
 	
 	public static Connection connection;
 	
