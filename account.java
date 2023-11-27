@@ -9,7 +9,8 @@ public class account{
 
 	private JFrame frame;
 	private JPanel panelTop;
-	private JPanel panelBot;
+	private JPanel panelL;
+	private JPanel panelR;
 	private JTextField display;
 	
 	private JTextField depo;
@@ -17,14 +18,17 @@ public class account{
 	private JButton deposit;
 	private JButton withdraw;
 	private JButton view;
+	private JLabel blank;
 	
 	/**
 	 * Constructor creates GUI 
 	 */
 	public account() {
+		blank = new JLabel();
 		frame = new JFrame();
 		panelTop = new JPanel();
-		panelBot = new JPanel();
+		panelL = new JPanel();
+		panelR = new JPanel();
 		deposit = new JButton("Deposit");
 		withdraw = new JButton("Withdraw");
 		view = new JButton("View");
@@ -41,21 +45,27 @@ public class account{
 		display.setEditable(false);
 		
 		panelTop.setBorder(BorderFactory.createEmptyBorder(6, 6, 30, 6));
-		panelBot.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
+		panelL.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
+		panelR.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
+
 
 		panelTop.setLayout(new GridLayout(0,1));
 		panelTop.add(display);
 		
-		panelBot.setLayout(new GridLayout(0,2));
+		panelL.setLayout(new GridLayout(0,1));
+		panelR.setLayout(new GridLayout(0,1));
+
 		
-		panelBot.add(deposit);
-		panelBot.add(depo);
-		panelBot.add(withdraw);
-		panelBot.add(with);
-		panelBot.add(view);
+		panelL.add(deposit);
+		panelR.add(depo);
+		panelL.add(withdraw);
+		panelR.add(with);
+		panelL.add(view);
+		panelR.add(blank);
 		
 		frame.add(panelTop, BorderLayout.NORTH);
-		frame.add(panelBot, BorderLayout.SOUTH);
+		frame.add(panelR, BorderLayout.EAST);
+		frame.add(panelL, BorderLayout.WEST);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Account Information");
