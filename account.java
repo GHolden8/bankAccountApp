@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*; 
 
-public class Account{
+public class account{
 
 	private JFrame frame;
 	private JPanel panelTop;
@@ -24,7 +24,7 @@ public class Account{
 	/**
 	 * Constructor creates GUI 
 	 */
-	public Account() {
+	public account() {
 		//whoLogged needs get username from database and just put it in () below
 		whoLogged = new JLabel();
 			
@@ -129,7 +129,7 @@ public class Account{
 	}
 	
 	public static void main(String[] args) {
-       new Account();
+       new account();
 	}
 
 }
