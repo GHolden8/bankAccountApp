@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 
-public class newAccountID extends ConfirmUser {
+public class NewAccountID extends ConfirmUser {
 
 	private JFrame frame;
 
@@ -18,7 +18,7 @@ public class newAccountID extends ConfirmUser {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					newAccountID window = new newAccountID();
+					NewAccountID window = new NewAccountID();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class newAccountID extends ConfirmUser {
 	/**
 	 * Create the application.
 	 */
-	public newAccountID() {
+	public NewAccountID() {
 		initialize();
 	}
 

@@ -5,9 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import login.Login;
-
-public class welcome {
+public class Welcome {
 
 	private JFrame frame;
 	private JPanel left;
@@ -15,7 +13,7 @@ public class welcome {
 	private JButton create;
 	private JButton returning;
 	
-	public welcome() {
+	public Welcome() {
 		frame = new JFrame();
 		left = new JPanel();
 		right = new JPanel();
@@ -45,7 +43,7 @@ public class welcome {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose();
-			new newAccountID(); 
+			new NewAccountID(); 
 		}
 		
 	}
@@ -60,7 +58,7 @@ public class welcome {
 		
 	}
 	public static void main(String[] args) {
-          new welcome();
+          new Welcome();
 	}
 
 

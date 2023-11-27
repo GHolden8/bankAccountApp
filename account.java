@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*; 
 
-public class account{
+public class Account{
 
 	private JFrame frame;
 	private JPanel panelTop;
@@ -23,7 +23,7 @@ public class account{
 	/**
 	 * Constructor creates GUI 
 	 */
-	public account() {
+	public Account() {
 		blank = new JLabel();
 		frame = new JFrame();
 		panelTop = new JPanel();
@@ -124,7 +124,7 @@ public class account{
 	}
 	
 	public static void main(String[] args) {
-       new account();
+       new Account();
 	}
 
 }
