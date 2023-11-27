@@ -19,11 +19,15 @@ public class Account{
 	private JButton withdraw;
 	private JButton view;
 	private JLabel blank;
+	private JLabel whoLogged;
 	
 	/**
 	 * Constructor creates GUI 
 	 */
 	public Account() {
+		//whoLogged needs get username from database and just put it in () below
+		whoLogged = new JLabel()
+			
 		blank = new JLabel();
 		frame = new JFrame();
 		panelTop = new JPanel();
@@ -50,6 +54,7 @@ public class Account{
 
 
 		panelTop.setLayout(new GridLayout(0,1));
+		panelTop.add(whoLogged); 
 		panelTop.add(display);
 		
 		panelL.setLayout(new GridLayout(0,1));
