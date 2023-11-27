@@ -50,6 +50,7 @@ public class AddUser{
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		JLabel lblAddUser = new JLabel("Add User");
 		lblAddUser.setBounds(6, 6, 61, 16);
