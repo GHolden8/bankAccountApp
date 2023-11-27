@@ -7,10 +7,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AddUser{
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField txt;
 	private JTextField txtNewPassword;
 	private JTextField txtEnterLastName;
@@ -24,6 +26,7 @@ public class AddUser{
 			public void run() {
 				try {
 					AddUser window = new AddUser();
+					Customer.connection();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -80,5 +83,11 @@ public class AddUser{
 		JButton btnConfirm = new JButton("OK");
 		btnConfirm.setBounds(177, 222, 117, 29);
 		frame.getContentPane().add(btnConfirm);
+		btnConfirm.addMouseListener(new MouseAdapter() {
+			//@Override
+			public void mouseClicked(MouseEvent e) {
+				Customer.add(txtEnterFirstName.getText(), txtEnterLastName.getText(), txt.getText(), txtNewPassword.getText());
+			}
+		});;
 	}
 }

@@ -1,9 +1,6 @@
 package Final;
 
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class Customer extends User {
 	
@@ -30,6 +27,26 @@ public class Customer extends User {
 			System.out.println("Connected");
 		}catch(Exception e) {
 			System.out.println("Could not connect");
+			System.out.println("Exception " + e.getMessage());
+		}
+	}
+	
+	public static void login(String username, String password) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery("select password from bank_accounts where username = \"" + username + "\"");
+			System.out.println("select password from bank_accounts where username = \"" + username + "\"");
+
+			while(result.next()) {
+				if (result.getString("password").equals(password)) {
+					System.out.println("Login successful");
+				}
+				else {
+					System.out.println("Incorrect Password");
+				}
+			}
+
+		}catch(Exception e) {
 			System.out.println("Exception " + e.getMessage());
 		}
 	}

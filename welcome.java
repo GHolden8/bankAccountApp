@@ -43,7 +43,9 @@ public class Welcome {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose();
-			new NewAccountID(); 
+			AddUser window = new AddUser();
+			Customer.connection();
+			window.frame.setVisible(true);
 		}
 		
 	}
@@ -51,9 +53,10 @@ public class Welcome {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-              frame.dispose(); 
-              new Login(); 
-              
+			frame.dispose(); 
+            Login window = new Login();
+            Customer.connection();
+  			window.frame.setVisible(true);  
 		}
 		
 	}
