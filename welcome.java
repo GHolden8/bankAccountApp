@@ -43,7 +43,7 @@ public class Welcome {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose();
-			new addUser(); 
+			new AddUser(); 
 		}
 		
 	}
