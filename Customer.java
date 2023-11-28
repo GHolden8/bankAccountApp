@@ -5,15 +5,19 @@ import java.sql.*;
 public class Customer {
 	
 	public static Connection connection;
+	public static String user;
+	public static String errorInfo;
 	
-	public String name;
-	public int checking;
-	public int savings;
+	public static void  setCurrentUser(String username) {
+		user = username;
+	}
 	
-	public Customer(String name, int checking, int savings) {
-		this.name = name;
-		this.checking = checking;
-		this.savings = savings;
+	public static String getCurrentUser() {
+		return user;
+	}
+	
+	public static String getErrorInfo() {
+		return errorInfo;
 	}
 	
 	public static void connection() {
@@ -40,6 +44,9 @@ public class Customer {
 			while(result.next()) {
 				if (result.getString("password").equals(password)) {
 					System.out.println("Login successful");
+					setCurrentUser(username);
+					Account window = new Account();
+					window.frame.setVisible(true);
 				}
 				else {
 					System.out.println("Incorrect Password");
@@ -89,7 +96,7 @@ public class Customer {
 		}
 	}	
 	
-	public int getChecking(String username) {
+	public static int getChecking(String username) {
 		
 		try {
 			Statement statement = connection.createStatement();
@@ -107,7 +114,7 @@ public class Customer {
 		return 0;
 	}
 	
-	public int getSavings(String username) {
+	public static int getSavings(String username) {
 		
 		try {
 			Statement statement = connection.createStatement();
@@ -125,6 +132,53 @@ public class Customer {
 		return 0;
 	}
 	
-	
+	public static void deposit(String username, String account, int amount) {
+		
+		int newAmount;
+		
+		if(account.equals("Checking"))
+			newAmount = getChecking(username) + amount;
+		else
+			newAmount = getSavings(username) + amount;
+				
+		try {
+			Statement statement = connection.createStatement();	
+			System.out.println("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
+			statement.executeUpdate("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
 
+		}catch(Exception e) {
+			System.out.println("Exception " + e.getMessage());
+		}
+	}
+	
+	public static void withdraw(String username, String account, int amount) {
+		
+		int newAmount;
+		
+		if(account.equals("Checking")) {
+			if(amount > getChecking(username)) {
+				errorInfo = "Unable to withdraw amount from checking account";
+				Withdraw.frmWithdraw.dispose(); 
+	            ErrorMessage window = new ErrorMessage();
+	            Customer.connection();
+	  			window.frame.setVisible(true);  
+			}
+			newAmount = getChecking(username) - amount;
+		}
+		else {
+			if(amount > getSavings(username))
+				errorInfo = "Unable to withdraw amount from savings account";
+			newAmount = getSavings(username) - amount;
+		}
+		
+		
+		try {
+			Statement statement = connection.createStatement();	
+			System.out.println("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
+			statement.executeUpdate("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
+
+		}catch(Exception e) {
+			System.out.println("Exception " + e.getMessage());
+		}
+	}
 }

@@ -26,6 +26,7 @@ public class Login implements ActionListener {
 			//@Override
 			public void mouseClicked(MouseEvent e) {
 				Customer.login(User,  Pass);
+				frame.dispose();
 			}
 		});;
 		

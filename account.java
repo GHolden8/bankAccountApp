@@ -5,26 +5,26 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*; 
 
-public class account{
+public class Account{
 
-	private JFrame frame;
+	JFrame frame;
 	private JPanel panelTop;
 	private JPanel panelL;
 	private JPanel panelR;
 	private JTextField display;
 	
-	private JTextField depo;
-	private JTextField with; 
+	private JTextField checking;
+	private JTextField savings; 
 	private JButton deposit;
 	private JButton withdraw;
-	private JButton view;
+	private JButton transfer;
 	private JLabel whoLogged;
 	private JButton logOut;
 	
 	/**
 	 * Constructor creates GUI 
 	 */
-	public account() {
+	public Account() {
 		//whoLogged needs get username from database and just put it in () below
 		whoLogged = new JLabel("Need to put user from base here");
 			
@@ -34,17 +34,21 @@ public class account{
 		panelR = new JPanel();
 		deposit = new JButton("Deposit");
 		withdraw = new JButton("Withdraw");
-		view = new JButton("View");
+		transfer = new JButton("Transfer");
 		logOut = new JButton("Logout");
 		
 		deposit.addActionListener(new deposit());
 		withdraw.addActionListener(new withdraw());
-		view.addActionListener(new view());
+		transfer.addActionListener(new transfer());
 		logOut.addActionListener(new logout());
 		
 		
-		depo = new JTextField(20);
-		with = new JTextField(20);
+		checking = new JTextField(20);
+		String checkingAmount = "" + Customer.getChecking(Customer.getCurrentUser());
+		checking.setText(checkingAmount);
+		savings = new JTextField(20);
+		String savingsAmount = "" + Customer.getSavings(Customer.getCurrentUser());
+		savings.setText(savingsAmount);
 
 		display = new JTextField(20);
 		display.setEditable(false);
@@ -63,10 +67,10 @@ public class account{
 
 		
 		panelL.add(deposit);
-		panelR.add(depo);
+		panelR.add(checking);
 		panelL.add(withdraw);
-		panelR.add(with);
-		panelL.add(view);
+		panelR.add(savings);
+		panelL.add(transfer);
 		panelR.add(logOut);
 		
 		
@@ -81,14 +85,14 @@ public class account{
 		frame.setVisible(true);
 
 	}
+	
 	private class logout implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
               frame.dispose();
-              new welcome();
+              new Welcome();
 		}
-		
 	}
 	
 	/**
@@ -100,13 +104,12 @@ public class account{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			double moneyIn = Double.parseDouble(depo.getText());
-			display.setText(Double.toString(moneyIn) + " has been depositied");
-			//Needs to deposit into database here 
-			
+			frame.dispose();
+			Deposit window = new Deposit();
+			window.frmDeposit.setVisible(true);
 		}
-		
 	}
+	
 	/**
 	 * 
 	 * provides functionality to withdraw button
@@ -116,32 +119,26 @@ public class account{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			double moneyOut = Double.parseDouble(with.getText());
-			//needs to get current money and make sure they have enough to withdraw
-			
-			display.setText(Double.toString(moneyOut) + " has been withdrawn");
-			//needs to withdrawal from database here
-			
+			frame.dispose();
+			Withdraw window = new Withdraw();
+			Withdraw.frmWithdraw.setVisible(true);
 		}
-		
 	}
+	
 	/**
 	 * 
 	 * provides functionality to view button
 	 *
 	 */
-	private class view implements ActionListener{
+	private class transfer implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//Gets account total from database and prints to display
 		}
-		
 	}
 	
 	public static void main(String[] args) {
-       new account();
+       new Account();
 	}
-
 }

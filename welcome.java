@@ -36,8 +36,8 @@ public class Welcome {
 		frame.setTitle("WELCOME TO OUR ONLINE BANKING APPLICATION");
 		frame.pack();
 		frame.setVisible(true);
-
 	}
+	
 	private class create implements ActionListener {
 
 		@Override
@@ -47,8 +47,8 @@ public class Welcome {
 			Customer.connection();
 			window.frame.setVisible(true);
 		}
-		
 	}
+	
 	private class returning implements ActionListener {
 
 		@Override
@@ -58,11 +58,9 @@ public class Welcome {
             Customer.connection();
   			window.frame.setVisible(true);  
 		}
-		
 	}
+	
 	public static void main(String[] args) {
           new Welcome();
 	}
-
-
 }
