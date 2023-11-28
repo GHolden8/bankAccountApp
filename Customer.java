@@ -28,10 +28,8 @@ public class Customer {
 
 		try {
 			connection = DriverManager.getConnection(url, username, password);
-			System.out.println("Connected");
 		}catch(Exception e) {
-			System.out.println("Could not connect");
-			System.out.println("Exception " + e.getMessage());
+			
 		}
 	}
 	
@@ -39,69 +37,43 @@ public class Customer {
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery("select password from bank_accounts where username = \"" + username + "\"");
-			System.out.println("select password from bank_accounts where username = \"" + username + "\"");
 
 			while(result.next()) {
 				if (result.getString("password").equals(password)) {
-					System.out.println("Login successful");
 					setCurrentUser(username);
 					Account window = new Account();
 					window.frame.setVisible(true);
 				}
 				else {
-					System.out.println("Incorrect Password");
+					errorInfo = "Unable to login";
+					LoginError window = new LoginError();
+		  			window.frame.setVisible(true);  
 				}
 			}
 
 		}catch(Exception e) {
-			System.out.println("Exception " + e.getMessage());
+			errorInfo = "Unable to login";
+			LoginError window = new LoginError();
+  			window.frame.setVisible(true);
 		}
 	}
 	
 	public static void add(String firstName, String lastName, String username, String password) {
 		try {
 			Statement statement = connection.createStatement();
-			System.out.println("insert into bank_accounts (firstName, lastName, username, password, checking, savings) "
-					+ "values ( '" + firstName + "', '" + lastName + "', '" + username + "', '" + password + "', " + 0 + ", " + 0 + ")");
 			statement.executeUpdate("insert into bank_accounts (firstName, lastName, username, password, checking, savings) "
 					+ "values ( '" + firstName + "', '" + lastName + "', '" + username + "', '" + password + "', " + 0 + ", " + 0 + ")");
-			System.out.println("User Created");
 			
 		}catch(Exception e) {
 			System.out.println("Exception " + e.getMessage());
 		}
 	}
 	
-	public static void setChecking(String username, int amount) {
-		
-		try {
-			Statement statement = connection.createStatement();	
-			System.out.println("update bank_accounts set checking = " + amount + " where username = \"" + username + "\"");
-			statement.executeUpdate("update bank_accounts set checking = " + amount + " where username = \"" + username + "\"");
-
-		}catch(Exception e) {
-			System.out.println("Exception " + e.getMessage());
-		}
-	}	
-
-	public static void setSavings(String username, int amount) {
-	
-		try {
-			Statement statement = connection.createStatement();		
-			System.out.println("update bank_accounts set savings = " + amount + " where username = \"" + username + "\"");
-			statement.executeUpdate("update bank_accounts set savings = " + amount + " where username = \"" + username + "\"");
-
-		}catch(Exception e) {
-			System.out.println("Exception " + e.getMessage());
-		}
-	}	
-	
 	public static int getChecking(String username) {
 		
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery("select checking from bank_accounts where username = \"" + username + "\"");
-			System.out.println("select checking from bank_accounts where username = \"" + username + "\"");
 
 			while(result.next()) {
 				return result.getInt("checking");
@@ -119,7 +91,6 @@ public class Customer {
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet result = statement.executeQuery("select savings from bank_accounts where username = \"" + username + "\"");
-			System.out.println("select savings from bank_accounts where username = \"" + username + "\"");
 
 			while(result.next()) {
 				return result.getInt("savings");
@@ -143,7 +114,6 @@ public class Customer {
 				
 		try {
 			Statement statement = connection.createStatement();	
-			System.out.println("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
 			statement.executeUpdate("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
 
 		}catch(Exception e) {
@@ -159,26 +129,106 @@ public class Customer {
 			if(amount > getChecking(username)) {
 				errorInfo = "Unable to withdraw amount from checking account";
 				Withdraw.frmWithdraw.dispose(); 
-	            ErrorMessage window = new ErrorMessage();
-	            Customer.connection();
+	            AccountError window = new AccountError();
 	  			window.frame.setVisible(true);  
 			}
-			newAmount = getChecking(username) - amount;
+			else {
+				newAmount = getChecking(username) - amount;
+			
+				try {
+					Statement statement = connection.createStatement();	
+					statement.executeUpdate("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
+					Withdraw.frmWithdraw.dispose();
+					Account window = new Account();
+					window.frame.setVisible(true);
+
+				}catch(Exception e) {
+					System.out.println("Exception " + e.getMessage());
+				}
+			}
 		}
 		else {
-			if(amount > getSavings(username))
+			if(amount > getSavings(username)) {
 				errorInfo = "Unable to withdraw amount from savings account";
-			newAmount = getSavings(username) - amount;
+				Withdraw.frmWithdraw.dispose(); 
+	            AccountError window = new AccountError();
+	  			window.frame.setVisible(true);  
+			}
+			else {
+				newAmount = getSavings(username) - amount;
+			
+				try {
+					Statement statement = connection.createStatement();	
+					statement.executeUpdate("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
+					Withdraw.frmWithdraw.dispose();
+					Account window = new Account();
+					window.frame.setVisible(true);
+
+				}catch(Exception e) {
+					System.out.println("Exception " + e.getMessage());
+				}
+			}
 		}
 		
+	}
+	
+	public static void transfer(String username, String from, String into, int amount) {
 		
-		try {
-			Statement statement = connection.createStatement();	
-			System.out.println("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
-			statement.executeUpdate("update bank_accounts set " + account + " = " + newAmount + " where username = \"" + username + "\"");
+		int newAmount1;
+		int	newAmount2;
+		
+		if(from.equals("Checking") && into.equals("Savings")) {
+			if(amount > getChecking(username)) {
+				errorInfo = "Unable to transfer amount from checking account";
+				Transfer.frmTransfer.dispose(); 
+	            AccountError window = new AccountError();
+	  			window.frame.setVisible(true);  
+			}
+			else {
+				newAmount1 = getChecking(username) - amount;
+				newAmount2 = getSavings(username) + amount;
+			
+				try {
+					Statement statement = connection.createStatement();	
+					statement.executeUpdate("update bank_accounts set " + from + " = " + newAmount1 + " where username = \"" + username + "\"");
+					statement.executeUpdate("update bank_accounts set " + into + " = " + newAmount2 + " where username = \"" + username + "\"");
+					Transfer.frmTransfer.dispose();
+					Account window = new Account();
+					window.frame.setVisible(true);
 
-		}catch(Exception e) {
-			System.out.println("Exception " + e.getMessage());
+				}catch(Exception e) {
+					System.out.println("Exception " + e.getMessage());
+				}
+			}
+		}
+		else if (from.equals("Savings") && into.equals("Checking")){
+			if(amount > getSavings(username)) {
+				errorInfo = "Unable to transfer amount from savings account";
+				Transfer.frmTransfer.dispose(); 
+	            AccountError window = new AccountError();
+	  			window.frame.setVisible(true);  
+			}
+			else {
+				newAmount1 = getSavings(username) - amount;
+				newAmount2 = getChecking(username) + amount;
+			
+				try {
+					Statement statement = connection.createStatement();	
+					statement.executeUpdate("update bank_accounts set " + from + " = " + newAmount1 + " where username = \"" + username + "\"");
+					statement.executeUpdate("update bank_accounts set " + into + " = " + newAmount2 + " where username = \"" + username + "\"");
+					Transfer.frmTransfer.dispose();
+					Account window = new Account();
+					window.frame.setVisible(true);
+
+				}catch(Exception e) {
+					System.out.println("Exception " + e.getMessage());
+				}
+			}
+		}
+		else {
+			Transfer.frmTransfer.dispose();
+			Account window = new Account();
+			window.frame.setVisible(true);
 		}
 	}
 }

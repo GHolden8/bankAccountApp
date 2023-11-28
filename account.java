@@ -121,7 +121,7 @@ public class Account{
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose();
 			Withdraw window = new Withdraw();
-			Withdraw.frmWithdraw.setVisible(true);
+			window.frmWithdraw.setVisible(true);
 		}
 	}
 	
@@ -134,7 +134,9 @@ public class Account{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//Gets account total from database and prints to display
+			frame.dispose();
+			Transfer window = new Transfer();
+			window.frmTransfer.setVisible(true);
 		}
 	}
 	

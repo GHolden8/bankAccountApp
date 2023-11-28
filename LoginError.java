@@ -4,12 +4,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 
-public class ErrorMessage {
+public class LoginError {
 
 	JFrame frame;
 
@@ -20,7 +22,7 @@ public class ErrorMessage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ErrorMessage window = new ErrorMessage();
+					LoginError window = new LoginError();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +34,7 @@ public class ErrorMessage {
 	/**
 	 * Create the application.
 	 */
-	public ErrorMessage() {
+	public LoginError() {
 		initialize();
 	}
 
@@ -55,6 +57,12 @@ public class ErrorMessage {
 		JButton btnClose = new JButton("Close");
 		btnClose.setBounds(150, 120, 89, 23);
 		frame.getContentPane().add(btnClose);
+		btnClose.addMouseListener(new MouseAdapter() {
+			//@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.dispose();
+	            new Welcome();
+			}
+		});;
 	}
-
 }

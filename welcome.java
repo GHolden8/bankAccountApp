@@ -55,12 +55,12 @@ public class Welcome {
 		public void actionPerformed(ActionEvent e) {
 			frame.dispose(); 
             Login window = new Login();
-            Customer.connection();
   			window.frame.setVisible(true);  
 		}
 	}
 	
 	public static void main(String[] args) {
-          new Welcome();
+		Customer.connection();
+        new Welcome();
 	}
 }

@@ -26,7 +26,6 @@ public class AddUser{
 			public void run() {
 				try {
 					AddUser window = new AddUser();
-					Customer.connection();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -87,11 +86,36 @@ public class AddUser{
 		btnConfirm.addMouseListener(new MouseAdapter() {
 			//@Override
 			public void mouseClicked(MouseEvent e) {
+				if (txtEnterFirstName.getText().equals("Enter first name")) {
+					frame.dispose();
+					Customer.errorInfo = "Unable to create new account";
+					LoginError window = new LoginError();
+		  			window.frame.setVisible(true);
+				}
+				else if (txtEnterLastName.getText().equals("Enter last name")) {
+					frame.dispose();
+					Customer.errorInfo = "Unable to create new account";
+					LoginError window = new LoginError();
+		  			window.frame.setVisible(true);
+				}
+				else if (txt.getText().equals("Enter new username")) {
+					frame.dispose();
+					Customer.errorInfo = "Unable to create new account";
+					LoginError window = new LoginError();
+		  			window.frame.setVisible(true);
+				}	
+				else if (txtNewPassword.getText().equals("Enter new password")) {
+					frame.dispose();
+					Customer.errorInfo = "Unable to create new account";
+					LoginError window = new LoginError();
+		  			window.frame.setVisible(true);
+				}
+				else {
 				Customer.add(txtEnterFirstName.getText(), txtEnterLastName.getText(), txt.getText(), txtNewPassword.getText());
 				frame.dispose();
 				Welcome window = new Welcome();
-				Customer.connection();
 				window.frame.setVisible(true);
+				}
 			}
 		});;
 	}

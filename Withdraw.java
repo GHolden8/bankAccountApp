@@ -80,9 +80,6 @@ public class Withdraw {
 			public void mouseClicked(MouseEvent e) {
 				String account = (String) comboBox.getItemAt(comboBox.getSelectedIndex());
 				Customer.withdraw(Customer.getCurrentUser(), account, Integer.parseInt(textField.getText()));
-				frmWithdraw.dispose();
-				Account window = new Account();
-				window.frame.setVisible(true);
 			}
 		});;
 		

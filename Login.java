@@ -30,7 +30,6 @@ public class Login implements ActionListener {
 			}
 		});;
 		
-		
 		username = new JLabel("Username: ");
 		password = new JLabel("Password: ");
 		user = new JTextField(20);

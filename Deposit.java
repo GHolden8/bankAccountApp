@@ -16,7 +16,7 @@ import java.awt.event.MouseEvent;
 
 public class Deposit {
 
-	JFrame frmDeposit;
+	static JFrame frmDeposit;
 	private JTextField textField;
 
 	/**
