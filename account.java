@@ -20,6 +20,8 @@ public class Account{
 	private JButton transfer;
 	private JLabel whoLogged;
 	private JButton logOut;
+	private JLabel save;
+	private JLabel check;
 	
 	/**
 	 * Constructor creates GUI 
@@ -36,6 +38,8 @@ public class Account{
 		withdraw = new JButton("Withdraw");
 		transfer = new JButton("Transfer");
 		logOut = new JButton("Logout");
+		save = new JLabel("Savings");
+		check = new JLabel("Checking");
 		
 		deposit.addActionListener(new deposit());
 		withdraw.addActionListener(new withdraw());
@@ -66,11 +70,14 @@ public class Account{
 		panelR.setLayout(new GridLayout(0,1));
 
 		
-		panelL.add(deposit);
+		
 		panelR.add(checking);
-		panelL.add(withdraw);
+		panelL.add(check)
 		panelR.add(savings);
-		panelL.add(transfer);
+		panelL.add(save);
+		panelL.add(withdraw);
+		panelL.add(deposit);
+		panelR.add(transfer);
 		panelR.add(logOut);
 		
 		
