@@ -33,6 +33,37 @@ public class Customer {
 		}
 	}
 	
+	public static String getName(String username) {
+		
+		String output = "";
+		
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery("select firstName from bank_accounts where username = \"" + username + "\"");
+
+			while(result.next()) {
+				output += result.getString("firstName");
+			}
+
+		}catch(Exception e) {
+			System.out.println("Exception " + e.getMessage());
+		}
+		
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet result = statement.executeQuery("select lastName from bank_accounts where username = \"" + username + "\"");
+
+			while(result.next()) {
+				output += " " + result.getString("lastName");
+			}
+
+		}catch(Exception e) {
+			System.out.println("Exception " + e.getMessage());
+		}
+		
+		return output;
+	}
+	
 	public static void login(String username, String password) {
 		try {
 			Statement statement = connection.createStatement();

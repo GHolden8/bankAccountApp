@@ -28,7 +28,7 @@ public class Account{
 	 */
 	public Account() {
 		//whoLogged needs get username from database and just put it in () below
-		whoLogged = new JLabel("Need to put user from base here");
+		whoLogged = new JLabel("Current User");
 			
 		frame = new JFrame();
 		panelTop = new JPanel();
@@ -56,6 +56,8 @@ public class Account{
 
 		display = new JTextField(20);
 		display.setEditable(false);
+		String name = Customer.getName(Customer.getCurrentUser());
+		display.setText(name);
 		
 		panelTop.setBorder(BorderFactory.createEmptyBorder(6, 6, 30, 6));
 		panelL.setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
@@ -72,7 +74,7 @@ public class Account{
 		
 		
 		panelR.add(checking);
-		panelL.add(check)
+		panelL.add(check);
 		panelR.add(savings);
 		panelL.add(save);
 		panelL.add(withdraw);
